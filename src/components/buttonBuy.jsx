@@ -9,8 +9,8 @@ const USDT_ABI = [
 ];
 
 function ButtonBuy() {
-  // const query = new URLSearchParams(window.location.search);
-  // const id = query.get("id");
+  const query = new URLSearchParams(window.location.search);
+  const projectId = query.get("id");
 
   const { walletProvider } = useAppKitProvider("eip155");
 
@@ -45,9 +45,8 @@ function ButtonBuy() {
 
     try {
       if (window.ethereum) {
-        console.log(window.ethereum);
         await window.ethereum.request({ method: "eth_requestAccounts" });
-        
+
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const usdtContract = new ethers.Contract(
@@ -58,12 +57,26 @@ function ButtonBuy() {
 
         const recipientAddress = "0x0Bab4D46746146A6aC998245aA30A6110EfB91ec";
 
-        const amountToSend = ethers.utils.parseUnits("100", 6);
+        const totalPrice = Number(amount * 1.2).toFixed(2);
+
+        const amountToSend = ethers.utils.parseUnits(totalPrice.toString(), 6);
         console.log(amountToSend);
         const tx = await usdtContract.transfer(recipientAddress, amountToSend);
-        console.log("Transação enviada:", tx.hash);
+        console.log("Transação enviada:", tx);
 
         await tx.wait();
+
+        fetch(`http://localhost:3001/web3/save-transaction`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...tx,
+            projectId,
+            valueUSD: amount,
+          }),
+        });
 
         setTransactionHash(tx.hash);
         window.location.href = "/portfolio";
@@ -79,13 +92,26 @@ function ButtonBuy() {
         );
 
         const recipientAddress = "0x0Bab4D46746146A6aC998245aA30A6110EfB91ec";
+        const totalPrice = Number(amount * 1.2).toFixed(2);
 
-        const amountToSend = ethers.utils.parseUnits("1.0", 6);
+        const amountToSend = ethers.utils.parseUnits(totalPrice.toString(), 6);
 
         const tx = await usdtContract.transfer(recipientAddress, amountToSend);
         console.log("Transação enviada:", tx.hash);
 
         await tx.wait();
+
+        fetch(`http://localhost:3001/web3/save-transaction`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...tx,
+            projectId,
+            valueUSD: amount,
+          }),
+        });
 
         setTransactionHash(tx.hash);
         window.location.href = "/portfolio";
