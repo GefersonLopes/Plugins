@@ -9,13 +9,13 @@ import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    {/* <AppKitProvider> */}
-    <App />
-    {/* </AppKitProvider> */}
-  </StrictMode>
-);
+// createRoot(document.getElementById("root")).render(
+//   <StrictMode>
+//     {/* <AppKitProvider> */}
+//     <App />
+//     {/* </AppKitProvider> */}
+//   </StrictMode>
+// );
 
 // createRoot(document.getElementById("wallet-connect-root")).render(
 //   <StrictMode>
@@ -25,10 +25,10 @@ createRoot(document.getElementById("root")).render(
 //   </StrictMode>
 // );
 
-// createRoot(document.getElementById("wallet-buy-root")).render(
-//   <StrictMode>
-//     <AppKitProvider>
-//       <ButtonBuy />
-//     </AppKitProvider>
-//   </StrictMode>
-// );
+createRoot(document.getElementById("wallet-buy-root")).render(
+  <StrictMode>
+    <AppKitProvider>
+      <ButtonBuy />
+    </AppKitProvider>
+  </StrictMode>
+);

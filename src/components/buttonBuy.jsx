@@ -11,6 +11,7 @@ const USDT_ABI = [
 function ButtonBuy() {
   const query = new URLSearchParams(window.location.search);
   const projectId = query.get("id");
+  const userAccount = localStorage.getItem("userAccount");
 
   const { walletProvider } = useAppKitProvider("eip155");
 
@@ -75,6 +76,7 @@ function ButtonBuy() {
             ...tx,
             projectId,
             valueUSD: amount,
+            userAccount,
           }),
         });
 
@@ -110,6 +112,7 @@ function ButtonBuy() {
             ...tx,
             projectId,
             valueUSD: amount,
+            userAccount,
           }),
         });
 
