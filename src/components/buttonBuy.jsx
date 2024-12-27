@@ -58,10 +58,11 @@ function ButtonBuy() {
 
         const recipientAddress = "0x0Bab4D46746146A6aC998245aA30A6110EfB91ec";
 
-        const totalPrice = Number(amount * 1.2).toFixed(2);
+        const totalPriceInCents = Math.round(amount * 1.2 * 100);
+        const totalPrice = totalPriceInCents / 100;
 
         const amountToSend = ethers.utils.parseUnits(totalPrice.toString(), 6);
-        console.log(amountToSend);
+
         const tx = await usdtContract.transfer(recipientAddress, amountToSend);
         console.log("Transação enviada:", tx);
 
@@ -94,7 +95,9 @@ function ButtonBuy() {
         );
 
         const recipientAddress = "0x0Bab4D46746146A6aC998245aA30A6110EfB91ec";
-        const totalPrice = Number(amount * 1.2).toFixed(2);
+        
+        const totalPriceInCents = Math.round(amount * 1.2 * 100);
+        const totalPrice = totalPriceInCents / 100;
 
         const amountToSend = ethers.utils.parseUnits(totalPrice.toString(), 6);
 
