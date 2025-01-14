@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createAppKit } from "@reown/appkit/react";
 import { Ethers5Adapter } from "@reown/appkit-adapter-ethers5";
-import { mainnet, arbitrum } from "@reown/appkit/networks";
+import { mainnet, bsc } from "@reown/appkit/networks";
 import { SiWalletconnect } from "react-icons/si";
 import { IoIosArrowForward } from "react-icons/io";
 
@@ -21,7 +21,7 @@ function WalletConnectButton() {
     createAppKit({
       adapters: [new Ethers5Adapter()],
       metadata: metadata,
-      networks: [mainnet, arbitrum],
+      networks: [mainnet, bsc],
       projectId,
       features: {
         email: false,
