@@ -1,0 +1,41 @@
+export const styles = {
+  modal: {
+    overlay: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+    },
+    content: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "90%",
+      height: "fit-content",
+      maxWidth: "400px",
+      padding: "20px",
+      margin: "auto",
+      backgroundColor: "rgb(29, 31, 33)",
+      color: "#fff",
+      borderRadius: "15px",
+      border: "none",
+      boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
+      animation: "fadeIn 0.5s ease-in-out",
+      overflow: "hidden",
+    },
+  },
+  button: {
+    backgroundColor: "#3389FB",
+    color: "#fff",
+    padding: "10px 20px",
+    borderRadius: "5px",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "16px",
+  },
+  buttonBuy: {
+    textAlign: "center",
+    marginTop: "20px",
+  },
+};
