@@ -1,5 +1,12 @@
-export const handleSaveTransaction = ({ tx, projectId, amount, userAccount }) => {
-  return fetch(`http://localhost:3001/web3/save-transaction`, {
+import { urlApi } from "../config/enviroments";
+
+export const handleSaveTransaction = async ({
+  tx,
+  projectId,
+  amount,
+  userAccount,
+}) => {
+  return fetch(`${urlApi}/web3/save-transaction`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { createAppKit } from "@reown/appkit/react";
 import { Ethers5Adapter } from "@reown/appkit-adapter-ethers5";
-import { mainnet, arbitrum } from "@reown/appkit/networks";
+import { mainnet, bsc } from "@reown/appkit/networks";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const AppKitContext = createContext(null);
 
+// eslint-disable-next-line react/prop-types
 export const AppKitProvider = ({ children }) => {
   const [appKit, setAppKit] = useState(null);
 
@@ -22,7 +24,7 @@ export const AppKitProvider = ({ children }) => {
       adapters: [new Ethers5Adapter()],
       enableInjected: true,
       metadata: metadata,
-      networks: [mainnet, arbitrum],
+      networks: [mainnet, bsc],
       projectId,
       features: {
         email: false,
@@ -59,4 +61,5 @@ export const AppKitProvider = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAppKitContext = () => useContext(AppKitContext);

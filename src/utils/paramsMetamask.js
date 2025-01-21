@@ -1,4 +1,6 @@
-export const USDT_CONTRACT_ADDRESS = "0x55d398326f99059fF775485246999027B3197955";
+export const USDT_CONTRACT_ADDRESS =
+  "0x55d398326f99059fF775485246999027B3197955";
+
 export const USDT_ABI = [
   "function transfer(address to, uint256 amount) public returns (bool)",
 ];

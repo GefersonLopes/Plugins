@@ -86,7 +86,7 @@ function ButtonBuy() {
         return;
       }
 
-      const response = await handleSaveTransaction({
+      await handleSaveTransaction({
         tx,
         projectId,
         amount,
@@ -94,7 +94,7 @@ function ButtonBuy() {
       });
 
       setTransactionHash(tx.hash);
-      // window.location.href = "/portfolio";
+      window.location.href = "/portfolio";
     } catch (err) {
       console.error("Erro ao enviar transação:", err);
       setError("Send transaction failed");
