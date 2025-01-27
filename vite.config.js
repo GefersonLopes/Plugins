@@ -4,15 +4,23 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   define: {
-    "process.env": {}, // Define `process.env` como um objeto vazio no navegador
+    "process.env": {},
   },
   build: {
     lib: {
       entry: "./src/main.jsx",
-      name: "ReactIframePlugin",
-      fileName: "react-iframe-plugin",
-      formats: ["iife"],
+      name: "ReactPlugin",
+      fileName: "react-plugin",
+      formats: ["umd"],
     },
     outDir: "dist",
+    rollupOptions: {
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
+      },
+    },
   },
 });

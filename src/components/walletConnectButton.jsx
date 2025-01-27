@@ -1,66 +1,39 @@
 import { useEffect, useState } from "react";
-import { createAppKit } from "@reown/appkit/react";
-import { Ethers5Adapter } from "@reown/appkit-adapter-ethers5";
-import { mainnet, bsc } from "@reown/appkit/networks";
 import { SiWalletconnect } from "react-icons/si";
 import { IoIosArrowForward } from "react-icons/io";
+import { useAppKitAccount } from "@reown/appkit/react";
 
 function WalletConnectButton() {
   const [haveMetaMask, setHaveMetaMask] = useState(false);
+  const { isConnected, address } = useAppKitAccount();
 
   useEffect(() => {
-    const projectId = "31311badff05f0661d793986d1cdc1a1";
-
-    const metadata = {
-      name: "My Website",
-      description: "My Website description",
-      url: "https://mywebsite.com",
-      icons: ["https://avatars.mywebsite.com/"],
-    };
-
-    createAppKit({
-      adapters: [new Ethers5Adapter()],
-      metadata: metadata,
-      networks: [mainnet, bsc],
-      projectId,
-      features: {
-        email: false,
-        socials: false,
-        emailShowWallets: false,
-      },
-      themeMode: "dark",
-      themeVariables: {
-        "--w3m-accent": "#0E131D",
-      },
-      featuredWalletIds: [
-        "c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96", // Colocando MetaMask
-        "20c15bd9ea127d47f5f3ae317df35e6a0f63af9c2607f897285f15b63b7b8a25", // Removendo WalletConnect
-      ],
-      enableWalletConnect: false,
-      enableCoinbase: false,
-      allWallets: "HIDE",
-      excludeWalletIds: [
-        "b59c98909bda10180d680f600d49556ff3fc69ba21f56c1480dc50b0aa19b819", // Removendo Trust Wallet
-        "e254b137adab566709826dc799fa296e37e4b8a6e51127382d17b39168353b1b", // Removendo Coinbase
-      ],
-      onConnect: (acount) => {
-        console.log("GEFERSON AAAAAA Conta conectada:", acount);
-        localStorage.setItem("userAccount", acount);
-        window.location.href = "/telegram";
-      },
-    });
-
     if (typeof window.ethereum !== "undefined") {
       setHaveMetaMask(true);
     }
   }, []);
 
+  useEffect(() => {
+    if (isConnected && window.location.pathname !== "/telegram") {
+      localStorage.setItem("userAccount", address);
+      window.location.href = "/telegram";
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isConnected]);
+
   const handleOpenMetamask = async () => {
     if (typeof window.ethereum !== "undefined") {
       try {
+        await window.ethereum.request({
+          method: "wallet_requestPermissions",
+          params: [{ eth_accounts: {} }],
+        });
+
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
+
         console.log("Contas conectadas:", accounts);
 
         localStorage.setItem("userAccount", accounts[0]);
@@ -69,6 +42,8 @@ function WalletConnectButton() {
       } catch (error) {
         console.error("Erro ao conectar a MetaMask:", error);
       }
+    } else {
+      console.error("MetaMask não está instalado.");
     }
   };
 

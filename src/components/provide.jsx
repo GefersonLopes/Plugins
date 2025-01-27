@@ -11,12 +11,12 @@ export const AppKitProvider = ({ children }) => {
   const [appKit, setAppKit] = useState(null);
 
   useEffect(() => {
-    const projectId = "b3584f49646841a9ad760ca5e98560f7";
+    const projectId = "31311badff05f0661d793986d1cdc1a1";
 
     const metadata = {
       name: "My Website",
       description: "My Website description",
-      url: "https://mywebsite.com",
+      url: "https://webservice-2498.chargedcloud.com.br",
       icons: ["https://avatars.mywebsite.com/"],
     };
 
@@ -46,13 +46,12 @@ export const AppKitProvider = ({ children }) => {
         "b59c98909bda10180d680f600d49556ff3fc69ba21f56c1480dc50b0aa19b819", // Trust Wallet
         "e254b137adab566709826dc799fa296e37e4b8a6e51127382d17b39168353b1b", // Coinbase
       ],
-      onConnect: (acount) => {
-        console.log("GEFERSON AAAAAA Conta conectada:", acount);
-        localStorage.setItem("userAccount", acount);
+      onConnect: (account) => {
+        console.log("Conta conectada:", account);
+        localStorage.setItem("userAccount", account);
         window.location.href = "/telegram";
       },
     });
-
     setAppKit(kit);
   }, []);
 
