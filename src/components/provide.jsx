@@ -11,12 +11,13 @@ export const AppKitProvider = ({ children }) => {
   const [appKit, setAppKit] = useState(null);
 
   useEffect(() => {
-    const projectId = "31311badff05f0661d793986d1cdc1a1";
+    const projectId = "bf370b1cd9b21c060d097e52fb45329a";
+    // 474fc5c4-2cdd-4cdc-bc56-1bfd6398597d=666b50c8004d75f1aceffcd21cb21ccffbd928b5a68e6f4c2868a50177e72864
 
     const metadata = {
       name: "My Website",
       description: "My Website description",
-      url: "https://webservice-2498.chargedcloud.com.br",
+      url: "https://plugins-alpha.vercel.app/",
       icons: ["https://avatars.mywebsite.com/"],
     };
 
