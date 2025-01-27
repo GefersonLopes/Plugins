@@ -3,11 +3,24 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  build: {
-    outDir: "dist", // Pasta onde os arquivos gerados serão salvos
-    emptyOutDir: true, // Limpa a pasta dist antes de cada build
+  define: {
+    "process.env": {},
   },
-  server: {
-    port: 3000, // Porta para desenvolvimento
+  build: {
+    lib: {
+      entry: "./src/main.jsx",
+      name: "ReactPlugin",
+      fileName: "react-plugin",
+      formats: ["umd"],
+    },
+    outDir: "dist",
+    rollupOptions: {
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
+      },
+    },
   },
 });
